@@ -3,10 +3,9 @@
 const axios = require('axios')
 
 const USER_SERVICE_URL = process.env.USER_SERVICE_URL || 'http://localhost:3001'
-// Must match INTERNAL_ACCESS_TOKEN in user_integration_test.env
-const USER_INTERNAL_ACCESS_TOKEN = process.env.USER_INTERNAL_ACCESS_TOKEN || 'internal-access-token'
+const USER_INTERNAL_ACCESS_TOKEN = process.env.INTERNAL_ACCESS_TOKEN
 // Must match ADMIN_SECRET_CODE in user_integration_test.env
-const ADMIN_SECRET_CODE = process.env.ADMIN_SECRET_CODE || 'W5bF7gesuS0xsNWmpsKy'
+const ADMIN_SECRET_CODE = process.env.ADMIN_SECRET_CODE
 
 const TEST_ADMIN = {
 	name: 'Test Admin',

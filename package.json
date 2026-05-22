@@ -16,7 +16,7 @@
 		"dev": "nodemon app.js",
 		"prepare": "husky install",
 		"coverage": " nyc --reporter=lcov mocha --timeout 10000 test --exit",
-		"test:integration": "mocha --timeout 30000 integration-tests --recursive --exit --reporter mocha-junit-reporter"
+		"test:integration": "./node_modules/.bin/mocha --timeout 30000 integration-tests --recursive --exit --reporter mocha-junit-reporter"
 	},
 	"repository": {
 		"type": "git",
