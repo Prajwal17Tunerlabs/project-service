@@ -305,6 +305,7 @@ jobs:
           name: Run project-service integration tests
           command: |
             export ADMIN_SECRET_CODE=$(grep '^ADMIN_SECRET_CODE=' ~/services/user/src/.env | cut -d= -f2)
+            export INTERNAL_ACCESS_TOKEN=$(grep '^INTERNAL_ACCESS_TOKEN=' ~/services/user/src/.env | cut -d= -f2)
             mkdir -p dev-ops/report
             npm run test:integration
           environment:
