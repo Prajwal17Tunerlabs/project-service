@@ -296,9 +296,21 @@ jobs:
           environment:
             NODE_ENV: development
 
-      - run:
-          name: Wait for all services to start
-          command: sleep 60
+      - wait_for_http:
+          label: user-service
+          url: http://localhost:7001/health
+
+      - wait_for_http:
+          label: entity-management
+          url: http://localhost:5002/health
+
+      - wait_for_http:
+          label: project-service
+          url: http://localhost:5003/health
+
+      - wait_for_http:
+          label: interface-service
+          url: http://localhost:3567/health
 
       # ── Run integration tests ─────────────────────────────────────────────
       - run:
