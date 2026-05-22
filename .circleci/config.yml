@@ -304,6 +304,7 @@ jobs:
       - run:
           name: Run project-service integration tests
           command: |
+            export ADMIN_SECRET_CODE=$(grep '^ADMIN_SECRET_CODE=' ~/services/user/src/.env | cut -d= -f2)
             mkdir -p dev-ops/report
             npm run test:integration
           environment:
@@ -312,8 +313,6 @@ jobs:
             PROJECT_SERVICE_URL: http://localhost:5003
             USER_SERVICE_URL: http://localhost:7001
             ENTITY_SERVICE_URL: http://localhost:5002
-            USER_INTERNAL_ACCESS_TOKEN: internal-access-token
-            ADMIN_SECRET_CODE: W5bF7gesuS0xsNWmpsKy
           no_output_timeout: 5m
 
       # ── Collect logs on failure ───────────────────────────────────────────
