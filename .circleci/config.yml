@@ -293,7 +293,7 @@ jobs:
           name: Start user-service
           command: |
             cd ~/services/user/src
-            npx nodemon app.js >> /tmp/logs/user-service.log 2>&1
+            nodemon app.js >> /tmp/logs/user-service.log 2>&1
           background: true
           environment:
             NODE_ENV: development
@@ -302,7 +302,7 @@ jobs:
           name: Start entity-management service
           command: |
             cd ~/services/entity-management/src
-            npx nodemon app.js >> /tmp/logs/entity-service.log 2>&1
+            nodemon app.js >> /tmp/logs/entity-service.log 2>&1
           background: true
           environment:
             NODE_ENV: development
@@ -311,7 +311,7 @@ jobs:
           name: Start project-service
           command: |
             cd ~/project-service
-            npx nodemon app.js >> /tmp/logs/project-service.log 2>&1
+            nodemon app.js >> /tmp/logs/project-service.log 2>&1
           background: true
           environment:
             NODE_ENV: development
