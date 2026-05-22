@@ -81,14 +81,15 @@ jobs:
       - run:
           name: Switch to Node 20
           command: |
-            source ~/.nvm/nvm.sh
+            export NVM_DIR="/opt/circleci/.nvm"
+            [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"
             nvm install 20
             nvm use 20
             nvm alias default 20
             node --version
-            echo "export NVM_DIR=\"$HOME/.nvm\"" >> $BASH_ENV
-            echo "source \"\$NVM_DIR/nvm.sh\""   >> $BASH_ENV
-            echo "nvm use 20 --silent"            >> $BASH_ENV
+            echo "export NVM_DIR=\"/opt/circleci/.nvm\"" >> $BASH_ENV
+            echo "source \"\$NVM_DIR/nvm.sh\""           >> $BASH_ENV
+            echo "nvm use 20 --silent"                   >> $BASH_ENV
 
       # ── Install project-service dependencies ────────────────────────────
       - restore_cache:
