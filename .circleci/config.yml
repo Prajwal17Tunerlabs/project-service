@@ -296,7 +296,7 @@ jobs:
           environment:
             NODE_ENV: development
 
-      # ── Wait for all services to be reachable (TCP only, no HTTP) ───────────
+      # ── Wait for all services: TCP then HTTP health check ───────────────────
       - wait_for_port:
           label: user-service
           port: 7001
@@ -312,6 +312,22 @@ jobs:
       - wait_for_port:
           label: interface-service
           port: 3567
+
+      - wait_for_http:
+          label: user-service
+          url: http://localhost:7001/health
+
+      - wait_for_http:
+          label: entity-management
+          url: http://localhost:5002/health
+
+      - wait_for_http:
+          label: project-service
+          url: http://localhost:5003/health
+
+      - wait_for_http:
+          label: interface-service
+          url: http://localhost:3567/health
 
       # ── Run integration tests ─────────────────────────────────────────────
       - run:
