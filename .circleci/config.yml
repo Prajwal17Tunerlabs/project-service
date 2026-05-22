@@ -296,6 +296,23 @@ jobs:
           environment:
             NODE_ENV: development
 
+      # ── Wait for all services to be reachable (TCP only, no HTTP) ───────────
+      - wait_for_port:
+          label: user-service
+          port: 7001
+
+      - wait_for_port:
+          label: entity-management
+          port: 5002
+
+      - wait_for_port:
+          label: project-service
+          port: 5003
+
+      - wait_for_port:
+          label: interface-service
+          port: 3567
+
       # ── Run integration tests ─────────────────────────────────────────────
       - run:
           name: Run project-service integration tests
