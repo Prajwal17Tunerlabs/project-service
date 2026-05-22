@@ -399,3 +399,4 @@ workflows:
             branches:
               only:
                 - develop
+                - develop-2
