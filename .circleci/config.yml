@@ -394,9 +394,4 @@ jobs:
 workflows:
   ci:
     jobs:
-      - integration-test:
-          filters:
-            branches:
-              only:
-                - develop
-                - develop-2
+      - integration-test
