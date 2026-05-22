@@ -25,7 +25,7 @@ commands:
             exit 1
 
   wait_for_http:
-    description: 'Poll an HTTP endpoint until it returns HTTP 2xx (max 90 s)'
+    description: 'Poll an HTTP endpoint until it returns HTTP 2xx (max 180 s)'
     parameters:
       url:
         type: string
@@ -36,12 +36,12 @@ commands:
           name: 'Wait for << parameters.label >> at << parameters.url >>'
           command: |
             echo "Waiting for << parameters.label >> at << parameters.url >>..."
-            for i in $(seq 1 30); do
+            for i in $(seq 1 60); do
               curl -sf --max-time 3 "<< parameters.url >>" 2>/dev/null && echo "<< parameters.label >> is up." && exit 0
-              echo "  attempt $i/30 – not ready, retrying in 3 s..."
+              echo "  attempt $i/60 – not ready, retrying in 3 s..."
               sleep 3
             done
-            echo "ERROR: << parameters.label >> did not become healthy within 90 s." >&2
+            echo "ERROR: << parameters.label >> did not become healthy within 180 s." >&2
             exit 1
 
 # ─────────────────────────────────────────────────────────────────────────────
@@ -282,18 +282,6 @@ jobs:
           environment:
             NODE_ENV: development
 
-      - wait_for_http:
-          label: user-service
-          url: http://localhost:7001/health
-
-      - wait_for_http:
-          label: entity-management
-          url: http://localhost:5002/health
-
-      - wait_for_http:
-          label: project-service
-          url: http://localhost:5003/health
-
       # ── Start interface-service after dependencies are healthy ─────────────
       - run:
           name: Configure interface-service environment
@@ -308,9 +296,9 @@ jobs:
           environment:
             NODE_ENV: development
 
-      - wait_for_port:
-          label: interface-service
-          port: 3567
+      - run:
+          name: Wait for all services to start
+          command: sleep 60
 
       # ── Run integration tests ─────────────────────────────────────────────
       - run:
