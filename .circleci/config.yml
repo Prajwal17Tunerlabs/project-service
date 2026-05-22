@@ -131,39 +131,39 @@ jobs:
       # ── Install dependencies for each dependent service ──────────────────
       - restore_cache:
           keys:
-            - user-deps-v1-{{ checksum "/root/services/user/src/package.json" }}
+            - user-deps-v1-{{ checksum "/home/circleci/services/user/src/package.json" }}
             - user-deps-v1-
       - run:
           name: Install user-service dependencies
           command: cd ~/services/user/src && npm install
       - save_cache:
-          key: user-deps-v1-{{ checksum "/root/services/user/src/package.json" }}
+          key: user-deps-v1-{{ checksum "/home/circleci/services/user/src/package.json" }}
           paths:
-            - /root/services/user/src/node_modules
+            - /home/circleci/services/user/src/node_modules
 
       - restore_cache:
           keys:
-            - entity-deps-v1-{{ checksum "/root/services/entity-management/src/package.json" }}
+            - entity-deps-v1-{{ checksum "/home/circleci/services/entity-management/src/package.json" }}
             - entity-deps-v1-
       - run:
           name: Install entity-management dependencies
           command: cd ~/services/entity-management/src && npm install
       - save_cache:
-          key: entity-deps-v1-{{ checksum "/root/services/entity-management/src/package.json" }}
+          key: entity-deps-v1-{{ checksum "/home/circleci/services/entity-management/src/package.json" }}
           paths:
-            - /root/services/entity-management/src/node_modules
+            - /home/circleci/services/entity-management/src/node_modules
 
       - restore_cache:
           keys:
-            - interface-deps-v1-{{ checksum "/root/services/interface-service/src/package.json" }}
+            - interface-deps-v1-{{ checksum "/home/circleci/services/interface-service/src/package.json" }}
             - interface-deps-v1-
       - run:
           name: Install interface-service dependencies
           command: cd ~/services/interface-service/src && npm install
       - save_cache:
-          key: interface-deps-v1-{{ checksum "/root/services/interface-service/src/package.json" }}
+          key: interface-deps-v1-{{ checksum "/home/circleci/services/interface-service/src/package.json" }}
           paths:
-            - /root/services/interface-service/src/node_modules
+            - /home/circleci/services/interface-service/src/node_modules
 
       # ── Infrastructure: all services via docker-compose ──────────────────
       - run:
