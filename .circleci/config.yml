@@ -323,7 +323,7 @@ jobs:
 
       - wait_for_http:
           label: project-service
-          url: http://localhost:5003/health
+          url: http://localhost:5003/health?basicCheck=true
 
       - wait_for_http:
           label: interface-service
