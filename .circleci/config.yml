@@ -214,7 +214,7 @@ jobs:
 
       - wait_for_port:
           label: Gotenberg
-          port: 3003
+          port: 3000
 
       # ── Create log directory before any background service starts ───────────
       - run:
