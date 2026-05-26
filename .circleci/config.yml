@@ -327,7 +327,7 @@ jobs:
 
       - wait_for_http:
           label: interface-service
-          url: http://localhost:3567/health
+          url: http://localhost:3567/project/health?basicCheck=true
 
       # ── Run integration tests ─────────────────────────────────────────────
       - run:
